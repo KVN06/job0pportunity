@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Register.css';
 
-const Register = () => {
+const Register = ({ onRegister }) => {
   const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({
     nombreCompleto: '',
@@ -14,6 +14,7 @@ const Register = () => {
     contrasena: '',
     confirmarContrasena: ''
   });
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e) => {
     setFormData({
@@ -23,17 +24,40 @@ const Register = () => {
   };
 
   const nextStep = () => {
-    setStep(step + 1);
+    if (validateStep()) {
+      setStep(step + 1);
+    }
   };
 
   const prevStep = () => {
     setStep(step - 1);
   };
 
-  const handleSubmit = (e) => {
+  const validateStep = () => {
+    switch (step) {
+      case 1:
+        return formData.nombreCompleto && formData.cedula && formData.fechaNacimiento;
+      case 2:
+        return formData.correoElectronico && formData.telefono && formData.direccion;
+      case 3:
+        return formData.contrasena && formData.contrasena === formData.confirmarContrasena;
+      default:
+        return true;
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí iría la lógica de registro
-    console.log(formData);
+    if (validateStep()) {
+      setIsLoading(true);
+      try {
+        await onRegister(formData);
+      } catch (error) {
+        console.error('Error en el registro:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    }
   };
 
   const renderProgressBar = () => {
@@ -99,7 +123,6 @@ const Register = () => {
                 name="fechaNacimiento"
                 value={formData.fechaNacimiento}
                 onChange={handleChange}
-                placeholder="dd/mm/aaaa"
                 required
               />
             </div>
@@ -193,12 +216,21 @@ const Register = () => {
                 </button>
               )}
               {step < 3 ? (
-                <button type="button" className="btn-primary" onClick={nextStep}>
+                <button 
+                  type="button" 
+                  className="btn-primary" 
+                  onClick={nextStep}
+                  disabled={!validateStep()}
+                >
                   Siguiente
                 </button>
               ) : (
-                <button type="submit" className="btn-primary">
-                  Registrarse
+                <button 
+                  type="submit" 
+                  className="btn-primary"
+                  disabled={isLoading || !validateStep()}
+                >
+                  {isLoading ? 'Registrando...' : 'Registrarse'}
                 </button>
               )}
             </div>

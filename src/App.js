@@ -9,15 +9,36 @@ import Register from './views/Register/Register';
 import RecoverPassword from './views/RecoverPassword/RecoverPassword';
 
 function App() {
+  const handleLogin = async (formData) => {
+    // Aquí iría la lógica de autenticación
+    console.log('Intentando iniciar sesión con:', formData);
+    // Simular una llamada API
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  };
+
+  const handleRegister = async (formData) => {
+    // Aquí iría la lógica de registro
+    console.log('Registrando usuario:', formData);
+    // Simular una llamada API
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  };
+
+  const handleRecoverPassword = async (formData) => {
+    // Aquí iría la lógica de recuperación de contraseña
+    console.log('Recuperando contraseña para:', formData);
+    // Simular una llamada API
+    await new Promise(resolve => setTimeout(resolve, 1000));
+  };
+
   return (
     <Router>
       <div className="App">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registro" element={<Register />} />
-          <Route path="/recuperar-contrasena" element={<RecoverPassword />} />
+          <Route path="/login" element={<Login onSubmit={handleLogin} />} />
+          <Route path="/registro" element={<Register onRegister={handleRegister} />} />
+          <Route path="/recuperar-contrasena" element={<RecoverPassword onRecover={handleRecoverPassword} />} />
         </Routes>
         <Footer />
       </div>
