@@ -11,64 +11,76 @@
 /* Hero Section */
 .hero-section {
   background-color: #2563eb;
-  padding: 4rem 0;
+  padding: 5rem 0;
   text-align: center;
   color: white;
-  margin-bottom: 2rem;
 }
 
 .hero-section h1 {
-  font-size: 2.5rem;
+  font-size: 3rem;
   font-weight: 700;
   margin-bottom: 1rem;
+  line-height: 1.2;
 }
 
 .hero-section p {
   font-size: 1.25rem;
   opacity: 0.9;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
 }
 
 .button-group {
   display: flex;
   gap: 1rem;
   justify-content: center;
+  align-items: center;
+}
+
+.button-group .btn {
+  width: 160px;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  font-size: 0.875rem;
 }
 
 .btn {
-  padding: 0.75rem 1.5rem;
-  border-radius: 0.5rem;
-  font-weight: 500;
-  font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  border: none;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
 }
 
 .btn-primary {
   background-color: white;
   color: #2563eb;
+  border-color: white;
 }
 
 .btn-primary:hover {
   background-color: #f8fafc;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .btn-secondary {
   background-color: transparent;
   color: white;
-  border: 2px solid white;
+  border-color: white;
 }
 
 .btn-secondary:hover {
   background-color: rgba(255, 255, 255, 0.1);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 /* Stats Section */
 .stats-section {
-  margin-bottom: 4rem;
+  margin: -3rem auto 4rem;
+  position: relative;
+  z-index: 2;
 }
 
 .stats-grid {
@@ -81,8 +93,8 @@
   text-align: center;
   padding: 2rem;
   background-color: white;
-  border-radius: 0.75rem;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .stat-number {
@@ -90,10 +102,11 @@
   font-weight: 700;
   color: #2563eb;
   margin: 0;
+  line-height: 1;
 }
 
 .stat-label {
-  color: #6b7280;
+  color: #4b5563;
   font-size: 1rem;
   margin: 0.5rem 0 0 0;
 }
@@ -111,7 +124,7 @@
 }
 
 .section-header h2 {
-  font-size: 1.75rem;
+  font-size: 1.875rem;
   font-weight: 700;
   color: #1f2937;
   margin: 0;
@@ -121,7 +134,9 @@
   color: #2563eb;
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .view-all:hover {
@@ -131,14 +146,15 @@
 .jobs-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .job-card {
   background-color: white;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
 }
 
 .job-header {
@@ -168,6 +184,7 @@
   cursor: pointer;
   font-size: 1.25rem;
   padding: 0;
+  transition: color 0.2s ease;
 }
 
 .favorite-btn:hover {
@@ -176,7 +193,7 @@
 
 .job-details {
   display: flex;
-  gap: 1rem;
+  gap: 1.5rem;
   margin-bottom: 1.5rem;
 }
 
@@ -217,6 +234,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
+  margin-top: 2rem;
 }
 
 .category-card {
@@ -225,8 +243,9 @@
   gap: 1rem;
   background-color: white;
   padding: 1.25rem;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e5e7eb;
   transition: transform 0.2s ease;
 }
 
@@ -238,7 +257,7 @@
   width: 3rem;
   height: 3rem;
   background-color: #eef2ff;
-  border-radius: 0.5rem;
+  border-radius: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -276,8 +295,9 @@
   text-align: center;
   padding: 2rem;
   background-color: #f9fafb;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   transition: transform 0.2s ease;
+  border: 1px solid #e5e7eb;
 }
 
 .resource-card:hover {
@@ -285,29 +305,30 @@
 }
 
 .resource-icon {
-  width: 3.5rem;
-  height: 3.5rem;
+  width: 4rem;
+  height: 4rem;
   background-color: #eef2ff;
-  border-radius: 0.75rem;
+  border-radius: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.5rem;
   color: #2563eb;
-  margin: 0 auto 1rem auto;
+  margin: 0 auto 1.5rem auto;
 }
 
 .resource-card h3 {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 600;
   color: #1f2937;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.75rem 0;
 }
 
 .resource-card p {
   color: #6b7280;
   font-size: 0.875rem;
   margin: 0;
+  line-height: 1.5;
 }
 
 /* Responsive Styles */
@@ -316,33 +337,59 @@
   .categories-grid {
     grid-template-columns: repeat(2, 1fr);
   }
+  
+  .resources-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
   .hero-section {
-    padding: 3rem 0;
+    padding: 4rem 0;
   }
 
   .hero-section h1 {
-    font-size: 2rem;
+    font-size: 2.25rem;
+  }
+
+  .hero-section p {
+    font-size: 1.125rem;
   }
 
   .button-group {
     flex-direction: column;
+    width: 100%;
     max-width: 300px;
     margin: 0 auto;
   }
 
-  .stats-grid,
-  .jobs-grid,
-  .categories-grid,
-  .resources-grid {
+  .button-group .btn {
+    width: 100%;
+  }
+
+  .stats-grid {
     grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .stats-section {
+    margin-top: -2rem;
   }
 
   .section-header {
     flex-direction: column;
     text-align: center;
     gap: 1rem;
+  }
+
+  .jobs-grid,
+  .categories-grid,
+  .resources-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .job-details {
+    flex-direction: column;
+    gap: 0.75rem;
   }
 }

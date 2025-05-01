@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Home.css';
 
 const Home = () => {
@@ -7,18 +8,18 @@ const Home = () => {
       {/* Hero Section */}
       <section className="hero-section">
         <div className="container">
-          <h1>Encuentra tu próxima oportunidad laboral</h1>
+          <h1>Encuentra tu próxima<br />oportunidad laboral</h1>
           <p>Conectamos talento con las mejores empresas</p>
           <div className="button-group">
             <button className="btn btn-primary">Buscar Empleos</button>
-            <button className="btn btn-secondary">Crear Cuenta</button>
-            <button className="btn btn-secondary">Iniciar Sesión</button>
+            <Link to="/registro" className="btn btn-secondary">Crear Cuenta</Link>
+            <Link to="/login" className="btn btn-secondary">Iniciar Sesión</Link>
           </div>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="stats-section container">
+      <section className="container stats-section">
         <div className="stats-grid">
           <div className="stat-card">
             <h3 className="stat-number">5,000+</h3>

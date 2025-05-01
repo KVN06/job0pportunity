@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = () => {
@@ -7,20 +8,20 @@ const Header = () => {
       <div className="container">
         <div className="header-content">
           <div className="logo-container">
-            <a href="/" className="logo-link">
+            <Link to="/" className="logo-link">
               <img src="/logo.png" alt="Job Opportunity" className="logo-image" />
               <span className="logo-text">JOB OPPORTUNITY</span>
-            </a>
+            </Link>
           </div>
           <nav className="nav-menu">
-            <a href="/" className="nav-link">Inicio</a>
-            <a href="/foros" className="nav-link">Foros/Capacitaciones</a>
-            <a href="/clasificados" className="nav-link">Clasificados</a>
-            <a href="/faqs" className="nav-link">FAQs</a>
+            <Link to="/" className="nav-link">Inicio</Link>
+            <Link to="/foros" className="nav-link">Foros/Capacitaciones</Link>
+            <Link to="/clasificados" className="nav-link">Clasificados</Link>
+            <Link to="/faqs" className="nav-link">FAQs</Link>
           </nav>
           <div className="nav-right">
             <div className="auth-buttons">
-              <a href="/login" className="nav-link">Mi Cuenta</a>
+              <Link to="/login" className="nav-link">Iniciar Sesión</Link>
             </div>
           </div>
         </div>

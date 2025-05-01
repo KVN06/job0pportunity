@@ -32,7 +32,7 @@ const Footer = () => {
             </ul>
           </div>
 
-          <div className="footer-section">
+          <div className="footer-section social-section">
             <h3 className="footer-subtitle">Síguenos</h3>
             <div className="social-links">
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="social-link">
