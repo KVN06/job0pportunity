@@ -218,6 +218,10 @@
   color: #2563eb;
 }
 
+.favorite-btn .fas.fa-star {
+  color: #2563eb;
+}
+
 .job-details {
   display: flex;
   gap: 1.5rem;
