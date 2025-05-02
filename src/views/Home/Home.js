@@ -1,8 +1,32 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
-const Home = () => {
+const Home = ({ featuredJobs = [], categories = [], stats = {}, isLoading = false }) => {
+  // Estado para manejar favoritos
+  const [favorites, setFavorites] = useState([]);
+  // Estado para búsqueda
+  const [searchQuery, setSearchQuery] = useState('');
+
+  // Efecto para cargar datos iniciales
+  useEffect(() => {
+    // Cargar favoritos del localStorage
+    const savedFavorites = localStorage.getItem('favorites');
+    if (savedFavorites) {
+      setFavorites(JSON.parse(savedFavorites));
+    }
+  }, []);
+
+  // Función para manejar favoritos
+  const toggleFavorite = (jobId) => {
+    const newFavorites = favorites.includes(jobId)
+      ? favorites.filter(id => id !== jobId)
+      : [...favorites, jobId];
+    
+    setFavorites(newFavorites);
+    localStorage.setItem('favorites', JSON.stringify(newFavorites));
+  };
+
   return (
     <div className="home">
       {/* Hero Section */}
@@ -10,6 +34,15 @@ const Home = () => {
         <div className="container">
           <h1>Encuentra tu próxima<br />oportunidad laboral</h1>
           <p>Conectamos talento con las mejores empresas</p>
+          <div className="search-container">
+            <input
+              type="text"
+              placeholder="Buscar empleos..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="search-input"
+            />
+          </div>
           <div className="button-group">
             <button className="btn btn-primary">Buscar Empleos</button>
             <Link to="/registro" className="btn btn-secondary">Crear Cuenta</Link>
@@ -21,18 +54,25 @@ const Home = () => {
       {/* Stats Section */}
       <section className="container stats-section">
         <div className="stats-grid">
-          <div className="stat-card">
-            <h3 className="stat-number">5,000+</h3>
-            <p className="stat-label">Empleos Disponibles</p>
-          </div>
-          <div className="stat-card">
-            <h3 className="stat-number">2,500+</h3>
-            <p className="stat-label">Empresas Registradas</p>
-          </div>
-          <div className="stat-card">
-            <h3 className="stat-number">10,000+</h3>
-            <p className="stat-label">Candidatos Colocados</p>
-          </div>
+          {isLoading ? (
+            <p>Cargando estadísticas...</p>
+          ) : (
+            <>
+              <div className="stat-card">
+                <h3 className="stat-number">{stats.jobs || '5,000+'}
+                </h3>
+                <p className="stat-label">Empleos Disponibles</p>
+              </div>
+              <div className="stat-card">
+                <h3 className="stat-number">{stats.companies || '2,500+'}</h3>
+                <p className="stat-label">Empresas Registradas</p>
+              </div>
+              <div className="stat-card">
+                <h3 className="stat-number">{stats.candidates || '10,000+'}</h3>
+                <p className="stat-label">Candidatos Colocados</p>
+              </div>
+            </>
+          )}
         </div>
       </section>
 
@@ -43,56 +83,31 @@ const Home = () => {
           <a href="/empleos" className="view-all">Ver todos →</a>
         </div>
         <div className="jobs-grid">
-          <div className="job-card">
-            <div className="job-header">
-              <div className="job-title-container">
-                <h3>Desarrollador Frontend</h3>
-                <p className="company-name">Tech Solutions</p>
+          {isLoading ? (
+            <p>Cargando empleos...</p>
+          ) : (
+            featuredJobs.map((job) => (
+              <div key={job.id} className="job-card">
+                <div className="job-header">
+                  <div className="job-title-container">
+                    <h3>{job.title}</h3>
+                    <p className="company-name">{job.company}</p>
+                  </div>
+                  <button 
+                    className="favorite-btn"
+                    onClick={() => toggleFavorite(job.id)}
+                  >
+                    <i className={`${favorites.includes(job.id) ? 'fas' : 'far'} fa-star`}></i>
+                  </button>
+                </div>
+                <div className="job-details">
+                  <span><i className="fas fa-map-marker-alt"></i> {job.location}</span>
+                  <span><i className="fas fa-clock"></i> {job.type}</span>
+                </div>
+                <Link to={`/empleo/${job.id}`} className="btn-details">Ver detalles →</Link>
               </div>
-              <button className="favorite-btn">
-                <i className="far fa-star"></i>
-              </button>
-            </div>
-            <div className="job-details">
-              <span><i className="fas fa-map-marker-alt"></i> Remoto</span>
-              <span><i className="fas fa-clock"></i> Tiempo completo</span>
-            </div>
-            <a href="/empleo/1" className="btn-details">Ver detalles →</a>
-          </div>
-
-          <div className="job-card">
-            <div className="job-header">
-              <div className="job-title-container">
-                <h3>Diseñador UX/UI</h3>
-                <p className="company-name">Creative Agency</p>
-              </div>
-              <button className="favorite-btn">
-                <i className="far fa-star"></i>
-              </button>
-            </div>
-            <div className="job-details">
-              <span><i className="fas fa-map-marker-alt"></i> Híbrido</span>
-              <span><i className="fas fa-clock"></i> Tiempo completo</span>
-            </div>
-            <a href="/empleo/2" className="btn-details">Ver detalles →</a>
-          </div>
-
-          <div className="job-card">
-            <div className="job-header">
-              <div className="job-title-container">
-                <h3>Project Manager</h3>
-                <p className="company-name">Global Systems</p>
-              </div>
-              <button className="favorite-btn">
-                <i className="far fa-star"></i>
-              </button>
-            </div>
-            <div className="job-details">
-              <span><i className="fas fa-map-marker-alt"></i> Presencial</span>
-              <span><i className="fas fa-clock"></i> Tiempo completo</span>
-            </div>
-            <a href="/empleo/3" className="btn-details">Ver detalles →</a>
-          </div>
+            ))
+          )}
         </div>
       </section>
 
@@ -103,45 +118,21 @@ const Home = () => {
             <h2>Categorías Populares</h2>
           </div>
           <div className="categories-grid">
-            <div className="category-card">
-              <div className="category-icon">
-                <i className="fas fa-laptop-code"></i>
-              </div>
-              <div className="category-info">
-                <h3>Tecnología</h3>
-                <p>1,200+ empleos</p>
-              </div>
-            </div>
-
-            <div className="category-card">
-              <div className="category-icon">
-                <i className="fas fa-chart-line"></i>
-              </div>
-              <div className="category-info">
-                <h3>Marketing</h3>
-                <p>500+ empleos</p>
-              </div>
-            </div>
-
-            <div className="category-card">
-              <div className="category-icon">
-                <i className="fas fa-pencil-ruler"></i>
-              </div>
-              <div className="category-info">
-                <h3>Diseño</h3>
-                <p>600+ empleos</p>
-              </div>
-            </div>
-
-            <div className="category-card">
-              <div className="category-icon">
-                <i className="fas fa-handshake"></i>
-              </div>
-              <div className="category-info">
-                <h3>Ventas</h3>
-                <p>800+ empleos</p>
-              </div>
-            </div>
+            {isLoading ? (
+              <p>Cargando categorías...</p>
+            ) : (
+              categories.map((category) => (
+                <div key={category.id} className="category-card">
+                  <div className="category-icon">
+                    <i className={category.icon}></i>
+                  </div>
+                  <div className="category-info">
+                    <h3>{category.name}</h3>
+                    <p>{category.jobCount}+ empleos</p>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
         </div>
       </section>

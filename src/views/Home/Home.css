@@ -29,6 +29,33 @@
   margin-bottom: 2.5rem;
 }
 
+.search-container {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto 2rem auto;
+}
+
+.search-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+}
+
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-input:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
 .button-group {
   display: flex;
   gap: 1rem;
@@ -391,5 +418,10 @@
   .job-details {
     flex-direction: column;
     gap: 0.75rem;
+  }
+
+  .search-container {
+    max-width: 100%;
+    padding: 0 1rem;
   }
 }
