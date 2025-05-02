@@ -203,7 +203,7 @@ const Register = ({ onRegister }) => {
       <div className="register-container">
         <div className="register-card">
           <div className="register-header">
-            <img src="/logo.png" alt="Job Opportunity" className="register-logo" />
+            <img src="/images/proyecto2.jpeg" alt="Job Opportunity" className="register-logo" />
             <h1>Registro de Usuario</h1>
           </div>
           {renderProgressBar()}

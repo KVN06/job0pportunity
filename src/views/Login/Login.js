@@ -33,7 +33,7 @@ const Login = ({ onSubmit }) => {
       <div className="login-container">
         <div className="login-card">
           <div className="login-header">
-            <img src="/logo.png" alt="Job Opportunity" className="login-logo" />
+            <img src="/images/proyecto2.jpeg" alt="Job Opportunity" className="login-logo" />
             <h1>Iniciar Sesión</h1>
           </div>
           <form className="login-form" onSubmit={handleSubmit}>

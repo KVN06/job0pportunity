@@ -35,7 +35,7 @@ const RecoverPassword = ({ onRecover }) => {
       <div className="recover-container">
         <div className="recover-card">
           <div className="recover-header">
-            <img src="/logo.png" alt="Job Opportunity" className="recover-logo" />
+            <img src="/images/proyecto2.jpeg" alt="Job Opportunity" className="recover-logo" />
             <h1>Recuperación De Cuenta</h1>
             <p className="recover-description">
               Ingresa tu correo electrónico y teléfono para recuperar tu cuenta
