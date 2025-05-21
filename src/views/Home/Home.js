@@ -5,8 +5,13 @@ import './Home.css';
 const Home = ({ featuredJobs = [], categories = [], stats = {}, isLoading = false }) => {
   // Estado para manejar favoritos
   const [favorites, setFavorites] = useState([]);
-  // Estado para búsqueda
-  const [searchQuery, setSearchQuery] = useState('');
+  // Estado para formulario
+  const [formData, setFormData] = useState({
+    searchQuery: '',
+    name: '',
+    yearsOfExperience: '',
+    photoUrl: ''
+  });
 
   // Efecto para cargar datos iniciales
   useEffect(() => {
@@ -27,6 +32,24 @@ const Home = ({ featuredJobs = [], categories = [], stats = {}, isLoading = fals
     localStorage.setItem('favorites', JSON.stringify(newFavorites));
   };
 
+  // Función para manejar cambios en el formulario
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  // Función para verificar si la URL es válida
+  const isValidImageUrl = (url) => {
+    try {
+      new URL(url);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
   return (
     <div className="home">
       {/* Hero Section */}
@@ -35,13 +58,62 @@ const Home = ({ featuredJobs = [], categories = [], stats = {}, isLoading = fals
           <h1>Encuentra tu próxima<br />oportunidad laboral</h1>
           <p>Conectamos talento con las mejores empresas</p>
           <div className="search-container">
-            <input
-              type="text"
-              placeholder="Buscar empleos..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="search-input"
-            />
+            <div className="search-form">
+              <input
+                type="text"
+                placeholder="Buscar empleos..."
+                name="searchQuery"
+                value={formData.searchQuery}
+                onChange={handleChange}
+                className="search-input"
+              />
+              <input
+                type="text"
+                placeholder="Nombre completo"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                className="form-input"
+              />
+              <input
+                type="number"
+                placeholder="Años de experiencia"
+                name="yearsOfExperience"
+                value={formData.yearsOfExperience}
+                onChange={handleChange}
+                className="form-input"
+                min="0"
+              />
+              <input
+                type="url"
+                placeholder="URL de tu foto"
+                name="photoUrl"
+                value={formData.photoUrl}
+                onChange={handleChange}
+                className="form-input"
+              />
+            </div>
+            {/* Preview Section */}
+            {(formData.name || formData.yearsOfExperience || formData.photoUrl) && (
+              <div className="preview-section">
+                <h3>Vista Previa del Perfil</h3>
+                <div className="preview-content">
+                  {isValidImageUrl(formData.photoUrl) && (
+                    <div className="preview-image">
+                      <img src={formData.photoUrl} alt="Foto de perfil" />
+                    </div>
+                  )}
+                  <div className="preview-info">
+                    {formData.name && <p className="preview-name">{formData.name}</p>}
+                    {formData.yearsOfExperience && (
+                      <p className="preview-experience">
+                        {formData.yearsOfExperience} años de experiencia
+                      </p>
+                    )}
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
           <div className="button-group">
             <button className="btn btn-primary">Buscar Empleos</button>

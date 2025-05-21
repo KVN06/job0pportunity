@@ -41,10 +41,18 @@ const RecoverPassword = ({ onRecover }) => {
               Ingresa tu correo electrónico y teléfono para recuperar tu cuenta
             </p>
           </div>
-          {message && <p className="message">{message}</p>}
+          {message && (
+            <div className={`message ${message.includes('Error') ? 'error' : 'success'}`}>
+              <i className={`fas ${message.includes('Error') ? 'fa-exclamation-circle' : 'fa-check-circle'}`}></i>
+              {message}
+            </div>
+          )}
           <form className="recover-form" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label htmlFor="email">Correo Electrónico</label>
+              <label htmlFor="email">
+                <i className="fas fa-envelope"></i>
+                Correo Electrónico
+              </label>
               <input
                 type="email"
                 id="email"
@@ -56,7 +64,10 @@ const RecoverPassword = ({ onRecover }) => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="phone">Teléfono</label>
+              <label htmlFor="phone">
+                <i className="fas fa-phone"></i>
+                Teléfono
+              </label>
               <input
                 type="tel"
                 id="phone"
@@ -69,7 +80,17 @@ const RecoverPassword = ({ onRecover }) => {
             </div>
             <div className="form-actions">
               <button type="submit" className="btn-primary" disabled={isLoading}>
-                {isLoading ? 'Procesando...' : 'Solicitud de Recuperación'}
+                {isLoading ? (
+                  <>
+                    <i className="fas fa-spinner fa-spin"></i>
+                    Procesando...
+                  </>
+                ) : (
+                  <>
+                    <i className="fas fa-key"></i>
+                    Solicitar Recuperación
+                  </>
+                )}
               </button>
             </div>
             <div className="recover-links">
@@ -77,9 +98,11 @@ const RecoverPassword = ({ onRecover }) => {
                 <span>o</span>
               </div>
               <Link to="/login" className="return-login">
+                <i className="fas fa-arrow-left"></i>
                 Volver a Inicio de Sesión
               </Link>
               <Link to="/registro" className="create-account">
+                <i className="fas fa-user-plus"></i>
                 ¿No tienes cuenta? Regístrate
               </Link>
             </div>

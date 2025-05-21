@@ -87,7 +87,7 @@ function App() {
   }, []);
 
   const handleLogin = async (formData) => {
-    // Aquí iría la lógica de autenticación
+    // Aquí iría la lógica de autenticación pero 
     console.log('Intentando iniciar sesión con:', formData);
     // Simular una llamada API
     await new Promise(resolve => setTimeout(resolve, 1000));
